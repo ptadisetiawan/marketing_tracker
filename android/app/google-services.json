@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "920028730835",
+    "firebase_url": "https://marketing-tracker-1da39.firebaseio.com",
+    "project_id": "marketing-tracker-1da39",
+    "storage_bucket": "marketing-tracker-1da39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920028730835:android:c1f319a5480d96e7910b26",
+        "android_client_info": {
+          "package_name": "com.example.marketing_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920028730835-tii151gh9ebc1sdvt4t86p5e68km0lj3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.marketing_tracker",
+            "certificate_hash": "4b0abb1e02391b17fc60ebf0f8412b98be0e5c0b"
+          }
+        },
+        {
+          "client_id": "920028730835-k1rdjf4c99c9c5g9n1tupvuekje65mhl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0_rkGP27Ne_0PxxnSlZRVkN-IxevEUn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920028730835-k1rdjf4c99c9c5g9n1tupvuekje65mhl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
