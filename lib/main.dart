@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:marketing_tracker/core/viewmodels/map_provider.dart';
+import 'package:marketing_tracker/core/model/user_location.dart';
+import 'package:marketing_tracker/core/services/location_service.dart';
 import 'package:marketing_tracker/injector.dart';
 import 'package:marketing_tracker/ui/router/router_generator.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => MapProvider(),
-        ),
+        StreamProvider<UserLocation>(
+            create: (context) => LocationService().locationStream),
       ],
       child: MaterialApp(
         title: 'Marketing Tracker',

@@ -8,7 +8,7 @@ class LocationUtils {
   double latitude;
   double longitude;
   Location location = new Location();
-  
+
   StreamSubscription<LocationData> locationSubscription;
 
   void getLocation() async {
@@ -31,16 +31,15 @@ class LocationUtils {
     var _locationData = await location.getLocation();
     latitude = _locationData.latitude;
     longitude = _locationData.longitude;
+    print('get location Utils');
   }
 
   void listeningLocation() {
-    //Adding location listener
-    
-     locationSubscription =  location.onLocationChanged.listen((LocationData data)
-    async {
+    locationSubscription =
+        location.onLocationChanged.listen((LocationData data) async {
       latitude = data.latitude;
       longitude = data.longitude;
+      print('listen location Utils');
     });
   }
-
 }
