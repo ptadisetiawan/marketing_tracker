@@ -28,6 +28,7 @@ class LocationService {
               'latitude': locationData.latitude.toString(),
               'longitude': locationData.longitude.toString()
             });
+            // print('sent');
           }
         });
       }

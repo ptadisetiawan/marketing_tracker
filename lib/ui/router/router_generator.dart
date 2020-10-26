@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marketing_tracker/ui/screens/page/home_screen.dart';
+import 'package:marketing_tracker/ui/screens/splash_screen.dart';
 
 class RouterGenerator {
   static const routeHome = "/home";
+  static const routeSplash = "/splash";
   // static const routeMarketingList = "/marketing";
   // static const routeMarketingDetail = "/marketing/details";
 
@@ -14,6 +16,8 @@ class RouterGenerator {
       case routeHome:
         return MaterialPageRoute(builder: (_) => HomeScreen());
         break;
+      case routeSplash:
+        return MaterialPageRoute(builder: (_) => SplashScreen());
       // case routeMarketingList:
       // return MaterialPageRoute(builder: (_) => HomeScreen());
       // break;
