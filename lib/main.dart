@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       providers: [
         StreamProvider<UserLocation>(
             create: (context) => LocationService().locationStream),
-        ChangeNotifierProvider(create: (context) => UserRepository.instance())
+        ChangeNotifierProvider(create: (context) => UserRepository.instance()),
       ],
       child: MaterialApp(
         title: 'Marketing Tracker',
