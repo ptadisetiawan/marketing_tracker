@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:marketing_tracker/core/model/user_repository.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _email;
   TextEditingController _password;
   final _formKey = GlobalKey<FormState>();
@@ -25,9 +25,6 @@ class _LoginPageState extends State<LoginPage> {
     final user = Provider.of<UserRepository>(context);
     return Scaffold(
         key: _key,
-        appBar: AppBar(
-          title: Text("Marketing Tracker"),
-        ),
         body: Form(
           key: _formKey,
           child: Center(

@@ -1,8 +1,30 @@
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  // @override
+  // void initState() {
+  //   startSplashScreen();
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Center(child: CircularProgressIndicator(),);
+    return Scaffold(
+      body: Center(
+        child: Text("Splash Screen"),
+      ),
+    );
   }
+
+  // startSplashScreen() async {
+  //   var duration = Duration(seconds: 3);
+  //   return Timer(duration, () {
+  //     Navigator.pushNamed(context, '/login');
+  //   });
+  // }
 }
