@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
-class UserRepository with ChangeNotifier {
+class AuthService with ChangeNotifier {
   FirebaseAuth _auth;
   FirebaseUser _user;
   Status _status = Status.Uninitialized;
 
-  UserRepository.instance() : _auth = FirebaseAuth.instance {
+  AuthService.instance() : _auth = FirebaseAuth.instance {
     _auth.onAuthStateChanged.listen(_onAuthStateChange);
   }
 

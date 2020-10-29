@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:marketing_tracker/core/model/user_repository.dart';
+import 'package:marketing_tracker/core/model/user_location.dart';
+import 'package:marketing_tracker/core/services/auth_service.dart';
+import 'package:marketing_tracker/core/viewmodels/location_provider.dart';
 import 'package:marketing_tracker/ui/screens/page/login_screen.dart';
 import 'package:marketing_tracker/ui/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,8 +15,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final locationProv = Provider.of<LocationProvider>(context);
+    locationProv.listenLocation();
     return Consumer(
-      builder: (context, UserRepository user, _) {
+      builder: (context, AuthService user, _) {
         switch (user.status) {
           case Status.Uninitialized:
             return SplashScreen();
@@ -47,7 +51,7 @@ class UserInfoPage extends StatelessWidget {
             RaisedButton(
               child: Text("SIGN OUT"),
               onPressed: () =>
-                  Provider.of<UserRepository>(context, listen: false).signOut(),
+                  Provider.of<AuthService>(context, listen: false).signOut(),
             )
           ],
         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:marketing_tracker/core/model/user_repository.dart';
+import 'package:marketing_tracker/core/services/auth_service.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,7 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserRepository>(context);
+    final user = Provider.of<AuthService>(context);
     return Scaffold(
         key: _key,
         body: Form(
