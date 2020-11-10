@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         // StreamProvider<UserLocation>(
-        //     create: (context) => LocationService().locationStream),
+        // create: (context) => LocationService().locationStream),
         ChangeNotifierProvider(create: (context) => AuthService.instance()),
         ChangeNotifierProvider(create: (context) => LocationProvider()),
       ],
