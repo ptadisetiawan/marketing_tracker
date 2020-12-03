@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    LocationProvider locationProvider = locator<LocationProvider>();
     return MultiProvider(
       providers: [
-        // StreamProvider<UserLocation>(
-        // create: (context) => LocationService().locationStream),
+        // StreamProvider(create: (context) => locationProvider.fetchLokasi()),
         ChangeNotifierProvider(create: (context) => AuthService.instance()),
-        ChangeNotifierProvider(create: (context) => LocationProvider()),
+        ChangeNotifierProvider(create: (context) => locationProvider),
       ],
       child: MaterialApp(
         title: 'Marketing Tracker',

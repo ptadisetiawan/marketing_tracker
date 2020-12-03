@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreService {
   static final instance = FirestoreService();
-  static final collection = Firestore.instance.collection('user_location');
 
   void setDataLokasi({
     String id,
@@ -13,5 +12,9 @@ class FirestoreService {
     final reference =
         Firestore.instance.collection('user_location').document(id);
     await reference.setData(data, merge: merge);
+  }
+
+   Stream<QuerySnapshot> getLokasiList() {
+    return Firestore.instance.collection('user_location').snapshots();
   }
 }

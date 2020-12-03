@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:marketing_tracker/ui/screens/page/home_screen.dart';
 import 'package:marketing_tracker/ui/screens/page/login_screen.dart';
+import 'package:marketing_tracker/ui/screens/page/user_info_page.dart';
 import 'package:marketing_tracker/ui/screens/splash_screen.dart';
 
 class RouterGenerator {

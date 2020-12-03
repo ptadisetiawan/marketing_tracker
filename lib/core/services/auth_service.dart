@@ -39,11 +39,11 @@ class AuthService with ChangeNotifier {
   Future<void> _onAuthStateChange(FirebaseUser firebaseUser) async {
     if (firebaseUser == null) {
       _status = Status.Unauthenticated;
-      print("tidak ada user");
+      // print("tidak ada user");
     } else {
       _user = firebaseUser;
       _status = Status.Authenticated;
-      print("ada user");
+      // print("ada user");
     }
     notifyListeners();
   }
