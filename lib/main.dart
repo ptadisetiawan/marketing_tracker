@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:marketing_tracker/core/services/auth_service.dart';
 import 'package:marketing_tracker/core/viewmodels/location_provider.dart';
+import 'package:marketing_tracker/core/viewmodels/user_provider.dart';
 import 'package:marketing_tracker/injector.dart';
 import 'package:marketing_tracker/ui/router/router_generator.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         // StreamProvider(create: (context) => locationProvider.fetchLokasi()),
         ChangeNotifierProvider(create: (context) => AuthService.instance()),
         ChangeNotifierProvider(create: (context) => locationProvider),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: MaterialApp(
         title: 'Marketing Tracker',

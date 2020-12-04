@@ -14,6 +14,7 @@ class LocationProvider extends ChangeNotifier {
   double long = 0.0;
   // double get long => _long;
   int detik = 0;
+  int detikHistory = 0;
 
   void listenLocation(BuildContext context) {
     final auth = Provider.of<AuthService>(context);
@@ -25,9 +26,18 @@ class LocationProvider extends ChangeNotifier {
             if (auth.status == Status.Authenticated) {
               if(lat != locationData.latitude && long != locationData.longitude){
                 detik = detik + 1;
+                detikHistory = detikHistory + 1;
                 if(detik > 5){
                   detik = 0;
                    firestoreService.setDataLokasi(id: auth.user.email, data: {
+                    "latitude": locationData.latitude,
+                    "longitude": locationData.longitude,
+                    "email" : auth.user.email
+                  });
+                } 
+                if(detikHistory > 10){
+                  detikHistory = 0;
+                   firestoreService.setHistoryLokasi(data: {
                     "latitude": locationData.latitude,
                     "longitude": locationData.longitude,
                     "email" : auth.user.email

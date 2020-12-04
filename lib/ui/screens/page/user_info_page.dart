@@ -25,40 +25,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     final locationProv = Provider.of<LocationProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text('Marketing Tracker')),
-      drawer: Drawer(
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text(widget.user.email),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text('List anggota'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-             ListTile(
-              title: Text('Edit profile'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
-            ListTile(
-              title: Text('Sign out'),
-              onTap: () {
-                Provider.of<AuthService>(context, listen: false).signOut();
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerApp(user: widget.user),
       body: Center(
         child: StreamBuilder(
             stream: locationProv.fetchLokasi(),
@@ -97,4 +64,57 @@ class _UserInfoPageState extends State<UserInfoPage> {
   }
 
  
+}
+
+class DrawerApp extends StatelessWidget {
+  const DrawerApp({
+    Key key,
+    @required this.user,
+  }) : super(key: key);
+
+   final FirebaseUser user;
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        // Important: Remove any padding from the ListView.
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Text(user.email),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+          ),
+           ListTile(
+            title: Text('Home'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/home');
+            },
+          ),
+          ListTile(
+            title: Text('List anggota'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/marketing', arguments: user);
+            },
+          ),
+           ListTile(
+            title: Text('Edit profile'),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+            },
+          ),
+          ListTile(
+            title: Text('Sign out'),
+            onTap: () {
+              Provider.of<AuthService>(context, listen: false).signOut();
+              Navigator.pushReplacementNamed(context, '/home');
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }

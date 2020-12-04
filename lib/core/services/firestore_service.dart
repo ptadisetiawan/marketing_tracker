@@ -14,7 +14,17 @@ class FirestoreService {
     await reference.setData(data, merge: merge);
   }
 
+  void setHistoryLokasi({Map<String, dynamic> data}) async {
+    final reference =
+        Firestore.instance.collection('location_history');
+    await reference.add(data);
+  }
+
    Stream<QuerySnapshot> getLokasiList() {
     return Firestore.instance.collection('user_location').snapshots();
+  }
+
+  Future<QuerySnapshot> getUserList(){
+    return Firestore.instance.collection('users').getDocuments();
   }
 }
