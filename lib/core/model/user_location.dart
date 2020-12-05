@@ -10,7 +10,7 @@ class UserLocation {
         email = parsedJSON['email'];
 
   UserLocation.fromMap(Map snapshot)
-        : latitude = snapshot['latitude'] ?? '',
-        longitude = snapshot['longitude'] ?? '',
+        : latitude = snapshot['latitude'] ?? 0,
+        longitude = snapshot['longitude'] ?? 0,
         email = snapshot['email'] ?? '';
 }

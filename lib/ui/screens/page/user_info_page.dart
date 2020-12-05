@@ -1,17 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:marketing_tracker/core/model/user_location.dart';
-import 'package:marketing_tracker/core/services/auth_service.dart';
 import 'package:marketing_tracker/core/viewmodels/location_provider.dart';
+import 'package:marketing_tracker/ui/screens/items/drawer.dart';
 import 'package:provider/provider.dart';
 
 class UserInfoPage extends StatefulWidget {
-  final FirebaseUser user;
-  UserInfoPage({Key key, this.user}) : super(key: key);
-  
-
   @override
   _UserInfoPageState createState() => _UserInfoPageState();
 }
@@ -25,7 +20,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     final locationProv = Provider.of<LocationProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text('Marketing Tracker')),
-      drawer: DrawerApp(user: widget.user),
+      drawer: DrawerApp(),
       body: Center(
         child: StreamBuilder(
             stream: locationProv.fetchLokasi(),
@@ -66,55 +61,3 @@ class _UserInfoPageState extends State<UserInfoPage> {
  
 }
 
-class DrawerApp extends StatelessWidget {
-  const DrawerApp({
-    Key key,
-    @required this.user,
-  }) : super(key: key);
-
-   final FirebaseUser user;
-
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        // Important: Remove any padding from the ListView.
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            child: Text(user.email),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-          ),
-           ListTile(
-            title: Text('Home'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-          ),
-          ListTile(
-            title: Text('List anggota'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/marketing', arguments: user);
-            },
-          ),
-           ListTile(
-            title: Text('Edit profile'),
-            onTap: () {
-              // Update the state of the app.
-              // ...
-            },
-          ),
-          ListTile(
-            title: Text('Sign out'),
-            onTap: () {
-              Provider.of<AuthService>(context, listen: false).signOut();
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}

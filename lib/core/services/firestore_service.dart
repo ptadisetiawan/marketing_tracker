@@ -27,4 +27,8 @@ class FirestoreService {
   Future<QuerySnapshot> getUserList(){
     return Firestore.instance.collection('users').getDocuments();
   }
+
+   Future<QuerySnapshot> getHistory(String email){
+     return Firestore.instance.collection('location_history').where('email', isEqualTo: email).getDocuments();
+  }
 }

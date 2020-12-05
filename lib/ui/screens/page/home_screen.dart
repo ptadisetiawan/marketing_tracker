@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
           case Status.Authenticating:
             return LoginScreen();
           case Status.Authenticated:
-            return UserInfoPage(user: user.user);
+            return UserInfoPage();
         }
       },
     );

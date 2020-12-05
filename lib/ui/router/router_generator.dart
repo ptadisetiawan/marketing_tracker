@@ -1,9 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:marketing_tracker/core/model/user.dart';
 import 'package:marketing_tracker/ui/screens/page/home_screen.dart';
 import 'package:marketing_tracker/ui/screens/page/login_screen.dart';
 import 'package:marketing_tracker/ui/screens/page/marketing_list_page.dart';
+import 'package:marketing_tracker/ui/screens/page/user_detail_page.dart';
 import 'package:marketing_tracker/ui/screens/page/user_info_page.dart';
 import 'package:marketing_tracker/ui/screens/splash_screen.dart';
 
@@ -13,7 +14,7 @@ class RouterGenerator {
   static const routeLogin = "/login";
   static const routeMaps = "/maps";
   static const routeMarketingList = "/marketing";
-  // static const routeMarketingDetail = "/marketing/details";
+  static const routeMarketingDetail = "/marketing/details";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
@@ -30,23 +31,19 @@ class RouterGenerator {
         break;
       case routeMaps:
         return MaterialPageRoute(
-            builder: (_) => UserInfoPage(
-                  user: args,
-                ));
+            builder: (_) => UserInfoPage());
         break;
       case routeMarketingList:
-        if (args is FirebaseUser) {
           return MaterialPageRoute(
-              builder: (_) => MarketingListPage(user: args));
-        }
+              builder: (_) => MarketingListPage());
         break;
-      // case routeMarketingDetail:
-      // if (args is MarketingModel) {
-      //   return MaterialPageRoute(builder: (_) => MarketingDetailScreen(
-      //     restaurant: args,
-      //   ));
-      // }
-      // break;
+      case routeMarketingDetail:
+      if (args is User) {
+        return MaterialPageRoute(builder: (_) => UserDetailPage(
+          userDetail: args,
+        ));
+      }
+      break;
     }
   }
 }

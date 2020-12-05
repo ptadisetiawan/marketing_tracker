@@ -1,13 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:marketing_tracker/core/viewmodels/user_provider.dart';
-import 'package:marketing_tracker/ui/screens/page/user_info_page.dart';
+import 'package:marketing_tracker/ui/screens/items/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MarketingListPage extends StatefulWidget {
-  final FirebaseUser user;
-  MarketingListPage({Key key, this.user}) : super(key: key);
   @override
   _MarketingListPageState createState() => _MarketingListPageState();
 }
@@ -24,18 +21,14 @@ class _MarketingListPageState extends State<MarketingListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('Marketing List')),
-        drawer: DrawerApp(user: widget.user),
+        drawer: DrawerApp(),
         body: _buildBody());
   }
 
   Widget _buildBody() {
     return Consumer<UserProvider>(
       builder: (context, userProv, _) {
-        if (userProv.users == null) {
-          userProv.getUserList();
-          return Center(child: CircularProgressIndicator());
-        }
-
+        userProv.getUserList();
         if (userProv.users.length > 0) {
           var userList = userProv.users;
           return Container(
@@ -52,7 +45,7 @@ class _MarketingListPageState extends State<MarketingListPage> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           IconButton(icon: Icon(Icons.person), onPressed: (){
-                            // 
+                             Navigator.pushNamed(context, '/marketing/details', arguments: userList[index]);
                           },),
                           SizedBox(width:10),
                           IconButton(icon: Icon(Icons.call), onPressed:(){

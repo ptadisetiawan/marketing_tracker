@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:marketing_tracker/core/model/user_location.dart';
 import 'package:marketing_tracker/core/services/auth_service.dart';
 import 'package:marketing_tracker/core/services/firestore_service.dart';
 import 'package:marketing_tracker/injector.dart';
@@ -15,6 +16,8 @@ class LocationProvider extends ChangeNotifier {
   // double get long => _long;
   int detik = 0;
   int detikHistory = 0;
+  List<UserLocation> _histories;
+  List<UserLocation> get histories => _histories;
 
   void listenLocation(BuildContext context) {
     final auth = Provider.of<AuthService>(context);
@@ -58,6 +61,15 @@ class LocationProvider extends ChangeNotifier {
 
   Stream<QuerySnapshot> fetchLokasi(){
     return firestoreService.getLokasiList();
+  }
+
+  void getHistory(String email) async {
+    var results = await firestoreService.getHistory(email);
+    print(results.toString());
+    _histories = results.documents
+            .map((doc) => UserLocation.fromMap(doc.data))
+            .toList();
+    notifyListeners();
   }
 
   
