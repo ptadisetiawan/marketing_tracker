@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _email;
   TextEditingController _password;
+  
   final _formKey = GlobalKey<FormState>();
   final _key = GlobalKey<ScaffoldState>();
 
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ListView(
             shrinkWrap: true,
             children: [
+              Image(image: AssetImage('images/logo.png')),
               Padding(
                   padding: EdgeInsets.all(16),
                   child: TextFormField(
@@ -63,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Material(
                         elevation: 5.0,
                         borderRadius: BorderRadius.circular(30.0),
-                        color: Colors.red,
+                        color: Colors.blue,
                         child: MaterialButton(
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
 import 'package:marketing_tracker/core/model/user_location.dart';
 import 'package:marketing_tracker/core/services/auth_service.dart';
@@ -18,7 +19,7 @@ class LocationProvider extends ChangeNotifier {
   int detikHistory = 0;
   List<UserLocation> _histories;
   List<UserLocation> get histories => _histories;
-
+  List<Address> _address;
   void listenLocation(BuildContext context) {
     final auth = Provider.of<AuthService>(context);
 
@@ -38,13 +39,22 @@ class LocationProvider extends ChangeNotifier {
                     "email" : auth.user.email
                   });
                 } 
-                if(detikHistory > 10){
+                if(detikHistory > 1){
                   detikHistory = 0;
-                   firestoreService.setHistoryLokasi(data: {
-                    "latitude": locationData.latitude,
-                    "longitude": locationData.longitude,
-                    "email" : auth.user.email
-                  });
+                  getAddressFromLoc(locationData.latitude,locationData.longitude);
+                   var first = _address.first;
+                   if(first != null){
+                    firestoreService.setHistoryLokasi(data: {
+                      "latitude": locationData.latitude,
+                      "longitude": locationData.longitude,
+                      "email" : auth.user.email,
+                      "address" : first.addressLine,
+                      "waktu" : DateTime.now().millisecondsSinceEpoch
+                    });
+                   }else{
+                     print('alamat tidak ditemukan');
+                   }
+                   
                 } 
                 lat = locationData.latitude;
                 long = locationData.longitude;
@@ -63,14 +73,16 @@ class LocationProvider extends ChangeNotifier {
     return firestoreService.getLokasiList();
   }
 
+  void getAddressFromLoc(double latitude, double longitude) async {
+    _address = await Geocoder.local.findAddressesFromCoordinates(new Coordinates(latitude, longitude));
+  }
+
   void getHistory(String email) async {
     var results = await firestoreService.getHistory(email);
-    print(results.toString());
     _histories = results.documents
             .map((doc) => UserLocation.fromMap(doc.data))
             .toList();
     notifyListeners();
   }
-
   
 }

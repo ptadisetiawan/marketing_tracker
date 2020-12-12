@@ -28,7 +28,11 @@ class _MarketingListPageState extends State<MarketingListPage> {
   Widget _buildBody() {
     return Consumer<UserProvider>(
       builder: (context, userProv, _) {
-        userProv.getUserList();
+        if(userProv.users == null){
+          userProv.getUserList();
+          return Center(child: CircularProgressIndicator());
+        }
+        
         if (userProv.users.length > 0) {
           var userList = userProv.users;
           return Container(

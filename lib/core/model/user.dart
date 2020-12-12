@@ -17,4 +17,15 @@ class User{
         perusahaan = snapshot['perusahaan'] ?? '',
         alamatPerusahaan = snapshot['alamat_perusahaan'] ?? '',
         photoUrl = 'https://www.unr.ac.id/images/dosen_male.png';
+
+   toJson() {
+    return {
+      "nama": nama,
+      "alamat": alamat,
+      "telp": telp,
+      "perusahaan": perusahaan,
+      "alamat_perusahaan": alamatPerusahaan,
+      "photoUrl" : 'https://www.unr.ac.id/images/dosen_male.png'
+    };
+  }
 }

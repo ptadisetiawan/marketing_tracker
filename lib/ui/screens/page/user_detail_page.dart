@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:marketing_tracker/core/model/user.dart';
 import 'package:marketing_tracker/core/viewmodels/location_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:time_formatter/time_formatter.dart';
 
 class UserDetailPage extends StatelessWidget {
   User userDetail;
   UserDetailPage({this.userDetail});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +42,19 @@ class UserDetailPage extends StatelessWidget {
                 Text("Alamat Perusahaan : ${userDetail.alamatPerusahaan}"),
                 Consumer<LocationProvider>(
                   builder: (context, locationProv, _) {
-                    locationProv.getHistory(userDetail.email);
-                    if (locationProv.histories.length > 0) {
+                    if(locationProv.histories == null){
+                       locationProv.getHistory(userDetail.email);
+                      return Center(child:CircularProgressIndicator());
+                    }
+
+                      locationProv.getHistory(userDetail.email);
+                       if(locationProv.histories.length < 1){
+                      return Container(
+                          height: 300,
+                          child: Center(
+                            child: Text('no history available'),
+                          ));
+                    }
                       var histories = locationProv.histories;
                       return Container(
                         height: MediaQuery.of(context).size.height * 0.6,
@@ -55,18 +68,15 @@ class UserDetailPage extends StatelessWidget {
                                   child: Card(
                                       child: ListTile(
                                     title: Text(
-                                        "[${histories[index].latitude.toString()}, ${histories[index].longitude.toString()}]",
+                                        "${histories[index].address}",
                                         style: TextStyle(fontSize: 12)),
+                                        subtitle: Text(formatTime(histories[index].waktu),
+                                        style: TextStyle(fontSize: 10)),
                                   )));
                             }),
                       );
-                    } else {
-                      return Container(
-                          height: 300,
-                          child: Center(
-                            child: Text('no history available'),
-                          ));
-                    }
+      
+                   
                   },
                 )
               ],
@@ -76,4 +86,5 @@ class UserDetailPage extends StatelessWidget {
       ),
     );
   }
+  
 }

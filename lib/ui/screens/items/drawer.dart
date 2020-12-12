@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:marketing_tracker/core/services/auth_service.dart';
+import 'package:marketing_tracker/ui/router/router_generator.dart';
 import 'package:provider/provider.dart';
 
 class DrawerApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthService>(
@@ -20,6 +20,7 @@ class DrawerApp extends StatelessWidget {
               ),
             ),
              ListTile(
+               leading: Icon(Icons.home),
               title: Text('Home'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, '/home');
@@ -27,19 +28,21 @@ class DrawerApp extends StatelessWidget {
             ),
             ListTile(
               title: Text('List anggota'),
+              leading: Icon(Icons.person),
               onTap: () {
                 Navigator.pushReplacementNamed(context, '/marketing');
               },
             ),
              ListTile(
               title: Text('Edit profile'),
+              leading: Icon(Icons.edit),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                Navigator.pushNamed(context, RouterGenerator.routeMarketingEdit, arguments:authProv.dbUser);
               },
             ),
             ListTile(
               title: Text('Sign out'),
+              leading: Icon(Icons.logout),
               onTap: () {
                 Provider.of<AuthService>(context, listen: false).signOut();
                 Navigator.pushReplacementNamed(context, '/home');
