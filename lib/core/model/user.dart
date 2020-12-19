@@ -16,7 +16,7 @@ class User{
         telp = snapshot['telp'] ?? '',
         perusahaan = snapshot['perusahaan'] ?? '',
         alamatPerusahaan = snapshot['alamat_perusahaan'] ?? '',
-        photoUrl = 'https://www.unr.ac.id/images/dosen_male.png';
+        photoUrl = snapshot['photoUrl'] ?? 'https://akusaradigital.com/profile.png';
 
    toJson() {
     return {
@@ -25,7 +25,7 @@ class User{
       "telp": telp,
       "perusahaan": perusahaan,
       "alamat_perusahaan": alamatPerusahaan,
-      "photoUrl" : 'https://www.unr.ac.id/images/dosen_male.png'
+      "photoUrl" : 'https://akusaradigital.com/profile.png'
     };
   }
 }

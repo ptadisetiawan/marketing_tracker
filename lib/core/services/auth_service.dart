@@ -46,7 +46,14 @@ class AuthService with ChangeNotifier {
   Future<void> _onAuthStateChange(FirebaseUser firebaseUser) async {
     if (firebaseUser == null) {
       _status = Status.Unauthenticated;
-      // print("tidak ada user");
+      var dataUser = new User(
+          nama: '',
+          alamat: '',
+          telp:  '',
+          perusahaan:  '',
+          alamatPerusahaan:  '',
+          email: '', photoUrl:  '');
+      setDbUser(dataUser);
     } else {
       _user = firebaseUser;
       _status = Status.Authenticated;
@@ -57,7 +64,7 @@ class AuthService with ChangeNotifier {
           telp: results['telp'] ?? '',
           perusahaan: results['perusahaan'] ?? '',
           alamatPerusahaan: results['alamat_perusahaan'] ?? '',
-          email: firebaseUser.email ?? '');
+          email: firebaseUser.email ?? '', photoUrl: results['photoUrl'] ?? '');
       setDbUser(dataUser);
       // print("ada user");
     }

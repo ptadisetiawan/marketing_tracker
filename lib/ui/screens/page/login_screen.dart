@@ -32,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: ListView(
             shrinkWrap: true,
             children: [
-              Image(image: AssetImage('images/logo.png')),
+              Image(image: AssetImage('images/logo.png'), height: 200, width: 200,),
               Padding(
                   padding: EdgeInsets.all(16),
                   child: TextFormField(

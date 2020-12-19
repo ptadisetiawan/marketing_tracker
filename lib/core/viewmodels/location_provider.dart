@@ -39,21 +39,28 @@ class LocationProvider extends ChangeNotifier {
                     "email" : auth.user.email
                   });
                 } 
-                if(detikHistory > 1){
+                if(detikHistory > 5){
                   detikHistory = 0;
                   getAddressFromLoc(locationData.latitude,locationData.longitude);
-                   var first = _address.first;
-                   if(first != null){
-                    firestoreService.setHistoryLokasi(data: {
-                      "latitude": locationData.latitude,
-                      "longitude": locationData.longitude,
-                      "email" : auth.user.email,
-                      "address" : first.addressLine,
-                      "waktu" : DateTime.now().millisecondsSinceEpoch
-                    });
+                   
+                   if(_address != null){
+                     var first = _address.first;
+                      if(first != null){
+                      firestoreService.setHistoryLokasi(data: {
+                        "latitude": locationData.latitude,
+                        "longitude": locationData.longitude,
+                        "email" : auth.user.email,
+                        "address" : first.addressLine,
+                        "waktu" : DateTime.now().millisecondsSinceEpoch
+                      });
+                      print('history updated');
+                    }else{
+                      print('alamat tidak ditemukan!!');
+                    }
                    }else{
-                     print('alamat tidak ditemukan');
+                     print('alamat tidak ditemukan!!');
                    }
+                  
                    
                 } 
                 lat = locationData.latitude;

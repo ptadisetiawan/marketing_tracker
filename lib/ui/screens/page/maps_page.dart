@@ -32,7 +32,7 @@ class _MapsPageState extends State<MapsPage> {
   Widget build(BuildContext context) {
     final locationProv = Provider.of<LocationProvider>(context);
     return Scaffold(
-      appBar: AppBar(title: Text('Marketing Tracker')),
+      appBar: AppBar(title: Text('FineLOC')),
       drawer: DrawerApp(),
       body: Center(
         child: StreamBuilder(

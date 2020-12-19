@@ -6,21 +6,27 @@ import 'package:provider/provider.dart';
 class DrawerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AuthService>(
-      builder: (context, authProv, _){
-        return Drawer(
+    return Consumer<AuthService>(builder: (context, authProv, _) {
+      return Drawer(
         child: ListView(
           // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Text(authProv.user.email ?? ''),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                  radius: 55,
+                  backgroundColor: Color(0xffFDCF09),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(authProv?.dbUser?.photoUrl ?? 'https://akusaradigital.com/profile.png'),
+                  ),
+                ),
+              accountName: Text(authProv?.dbUser?.nama ?? ''),
+              accountEmail: Text(authProv?.dbUser?.email ?? ''),
+              decoration: BoxDecoration(color: Colors.blue),
             ),
-             ListTile(
-               leading: Icon(Icons.home),
+            ListTile(
+              leading: Icon(Icons.home),
               title: Text('Home'),
               onTap: () {
                 Navigator.pushReplacementNamed(context, '/home');
@@ -33,11 +39,12 @@ class DrawerApp extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, '/marketing');
               },
             ),
-             ListTile(
+            ListTile(
               title: Text('Edit profile'),
               leading: Icon(Icons.edit),
               onTap: () {
-                Navigator.pushNamed(context, RouterGenerator.routeMarketingEdit, arguments:authProv.dbUser);
+                Navigator.pushNamed(context, RouterGenerator.routeMarketingEdit,
+                    arguments: authProv.dbUser);
               },
             ),
             ListTile(
@@ -51,7 +58,6 @@ class DrawerApp extends StatelessWidget {
           ],
         ),
       );
-      } 
-    );
+    });
   }
 }

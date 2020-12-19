@@ -32,7 +32,7 @@ class _MarketingListPageState extends State<MarketingListPage> {
           userProv.getUserList();
           return Center(child: CircularProgressIndicator());
         }
-        
+        userProv.getUserList();
         if (userProv.users.length > 0) {
           var userList = userProv.users;
           return Container(
